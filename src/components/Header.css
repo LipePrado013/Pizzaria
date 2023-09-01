@@ -1,0 +1,8 @@
+
+.Mynav  img{
+    transition: all .5s; 
+}
+.Mynav:hover > img{
+    bottom: 16px;
+    /* transition: all .5s;  */
+}
