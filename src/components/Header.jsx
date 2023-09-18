@@ -1,7 +1,6 @@
 import './Header.css'
 import logoPizzaria from '../assets/img/logoPizzaria1.png'
 import fatiaP from '../assets/img/fatiaPizzaR.png'
-import refri from '../assets/img/refriR.png'
 import cardapio from '../assets/img/cardapioR.png'
 import user from '../assets/img/user.png'
 import { useState } from 'react'
@@ -22,15 +21,15 @@ function Header() {
                 <div className="flex gap-20 font-bold  max-[966px]:hidden">
 
                     <div className='Mynav overflow-hidden h-24 relative flex items-end justify-center '>
-                        <a href="" className='bg-white  pl-6 pr-6 rounded-lg z-10'>Inicio</a>
+                        <a href="/" className='bg-white  pl-6 pr-6 rounded-lg z-10'>Inicio</a>
                         <img className='absolute -bottom-10 ' src={fatiaP} width='70rem' />{/* bottom-4*/}
                     </div>
+                    {/* <div className='Mynav overflow-hidden h-24 relative flex items-end justify-center '>
+                        <a href="#Refri" className='bg-white  pl-6 pr-6 rounded-lg z-10'>Bebidas</a>
+                        <img className='absolute -bottom-10 ' src={refri} width='70rem' />
+                    </div> */}
                     <div className='Mynav overflow-hidden h-24 relative flex items-end justify-center '>
-                        <a href="" className='bg-white  pl-6 pr-6 rounded-lg z-10'>Bebidas</a>
-                        <img className='absolute -bottom-10 ' src={refri} width='70rem' />{/* bottom-4*/}
-                    </div>
-                    <div className='Mynav overflow-hidden h-24 relative flex items-end justify-center '>
-                        <a href="" className='bg-white  pl-6 pr-6 rounded-lg z-10'>Cardapio</a>
+                        <a href="/cardapio" className='bg-white  pl-6 pr-6 rounded-lg z-10'>Cardapio</a>
                         <img className='absolute -bottom-14 ' src={cardapio} width='70rem' />{/* bottom-4*/}
                     </div>
                     <div className='Mynav overflow-hidden h-24 relative flex items-end justify-center '>
@@ -42,12 +41,12 @@ function Header() {
                 </div>
 
                 <div className="flex text-3xl gap-7 max-[966px]:hidden">
-                    <buttom href='' className='hover:text-gray-400 cursor-pointer'>
+                    <a href='' className='hover:text-gray-400 cursor-pointer'>
                         <i className="fa-solid fa-cart-shopping"></i>
-                    </buttom>
-                    <buttom href='' className='hover:text-green-500 cursor-pointer'>
+                    </a>
+                    <a href='/login' className='hover:text-green-500 cursor-pointer'>
                         <i className="fa-solid fa-circle-user"></i>
-                    </buttom>
+                    </a>
 
                 </div>
 
