@@ -1,47 +1,87 @@
 import Header from "../components/Header"
-import pizza from '../assets/img/meiapizza.png'
-import garfoefaca from '../assets/img/garfoefaca.png'
-import rolo from '../assets/img/rolo.png'
+import pizza from '../assets/img/pizza1card.png'
+import pizza2 from '../assets/img/pizza2card.png'
+import pizza3 from '../assets/img/pizza4card.png'
+
+import { cardsData } from "./Cardapio"
+
 import './Home.css'
 
+
+
 function Home() {
+
+    // var myIndex = 0;
+    // carousel();
+
+    // function carousel() {
+    //     var i;
+    //     var x = document.getElementsByClassName("mySlides");
+    //     for (i = 0; i < x.length; i++) {
+    //         x[i].style.display = "none";
+    //     }
+    //     myIndex++;
+    //     if (myIndex > x.length) { myIndex = 1 }
+    //     x[myIndex - 1].style.display = "block";
+    //     setTimeout(carousel, 2000); // Change image every 2 seconds
+    // }
 
     return (
         <>
             <Header />
 
-            <div className=" flex flex-col items-center pt-[8rem] h-screen text-white ">{/*container  */}
-                <div className="flex justify-between w-full h-full bg-black overflow-hidden">
+            <div className={`pt-36 h-screen  flex flex-col items-center `}> {/* container  */}
 
-                    <div className=" w-[25%] flex ">
-                        <img src={pizza} id="imgpizza" className="w-[100%]" />
-                    </div>
+                <div className=" flex container flex-wrap p-3 bg-gray-200"> {/* box top */}
 
-                    <div className="  w-[45%] relative  border-white flex justify-center ">
-                        <div className="shadow-[0_0_10px] absolute  top-44 w-[45%] h-[55%] rounded-2xl p-3 bg-[#b5b5b538] flex items-center overflow-hidden ">
-                            <img src={garfoefaca} className="w-[90%] opacity-40"/>
-                           <div className="absolute flex justify-around flex-col h-full">
-                            <h2 className="text-8xl mb-4">Todas <br/>as quintas</h2>
-                            <h3 className="text-6xl text-yellow-300">25% OFF</h3>
-                           </div>
+                    <div className=" w-[50%] text-white flex flex-col gap-3 ">{/*  cardsStick*/}
+
+                        {/* <h1 className="text-5xl text-black font-bold">Promoções</h1> */}
+
+                        <div className="flex w-full relative">
+
+                            <h1 className="titleH1 text-5xl font-bold absolute z-10">Promoções</h1>
+
+                            {cardsData.map((card) => (
+                                <>
+
+                                    <div className={`cardStick bg-[url('${card.img}')] bg-cover bg-left overflow-hidden h-96 w-[100px]`}>
+                                        <div className="Stick h-full flex flex-col justify-between bg-[#00000094] p-5 pt-12">
+                                            <h1 className="title text-3xl w-[200px]">{card.title}</h1>
+                                            <a href="#" className="title  w-32 text-center rounded-lg bg-[#8F0701] hover:bg-[#CF0801]">Comprar</a>
+
+                                        </div>
+                                    </div>
+
+                                </>
+                            ))}
+
+
+
                         </div>
+
+
+                    </div>{/* fim cardsStick*/}
+
+                    <div className="border w-[50%]">
+
+                        {/* <div >
+                            <img className="mySlides h-96 object-cover" src={pizza} width='100%' />
+                            <img className="mySlides h-96 object-cover" src={pizza3} width='100%' />
+                            <img className="mySlides h-96 object-cover" src={pizza2} width='100%' />
+                        </div> */}
+
                     </div>
-                    
-                    <div className="w-[25%] ">
-                        <img src={rolo}  className=" h-[110%] w-full -rotate-[45deg] object-cover" />
-                    </div>
 
-                </div>
+                </div> {/* box top fim*/}
 
-                
-
-            </div>{/*container fim */}
-            <div className=" flex flex-col items-center h-screen pt-5">{/*container  */}
-                <div className="container border border-black ">
+                <div >
                     oi
                 </div>
 
-            </div>{/*container fim */}
+            </div > {/* container fim */}
+
+
         </>
     )
 }

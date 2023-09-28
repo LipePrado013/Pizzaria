@@ -1,3 +1,32 @@
 #imgpizza {
     filter: drop-shadow(0 0 15px #000);
 }
+
+.cardStick {
+    transition: .8s;
+}
+
+.cardStick:hover {
+    width: 50%;
+}
+
+.cardStick:hover>.Stick {
+    visibility: visible;
+    background: #00000044;
+}
+
+.titleH1 {
+    color: #ffffff9f;
+    width: 100%;
+    background: #00000080;
+}
+
+.title {
+    opacity: 0;
+    transition: .8s;
+}
+
+.Stick:hover>.title {
+    opacity: 1;
+    visibility: visible;
+}

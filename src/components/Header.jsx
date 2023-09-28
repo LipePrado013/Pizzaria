@@ -13,8 +13,8 @@ function Header() {
 
     return (
         <>
-            <div className="z-50 w-full fixed bg-white h-32 flex items-end justify-around gap-5 p-5 text-black max-[966px]:justify-around max-[966px]:items-center max-[500px]:justify-between shadow-[0_-10px_25px_2px_black]">
-                <div className=''>
+            <div className=" z-50 w-full fixed bg-[#C1132F] h-32 flex items-end justify-around gap-5 p-5 text-black max-[966px]:justify-around max-[966px]:items-center max-[500px]:justify-between shadow-[0_-10px_25px_2px_black]">
+                <div className='bg-white rounded-3xl shadow-[5px_5px_20px_-5px_black]'>
                     <img src={logoPizzaria} width='100rem' />
                 </div>
 
@@ -29,24 +29,24 @@ function Header() {
                         <img className='absolute -bottom-10 ' src={refri} width='70rem' />
                     </div> */}
                     <div className='Mynav overflow-hidden h-24 relative flex items-end justify-center '>
-                        <a href="/cardapio" className='bg-white  pl-6 pr-6 rounded-lg z-10'>Cardapio</a>
+                        <a href="/cardapio" className='bg-white pl-6 pr-6 rounded-lg z-10'>Cardapio</a>
                         <img className='absolute -bottom-14 ' src={cardapio} width='70rem' />{/* bottom-4*/}
                     </div>
                     <div className='Mynav overflow-hidden h-24 relative flex items-end justify-center '>
-                        <a href="" className='bg-white  pl-6 pr-6 rounded-lg z-10'>Cadastrar-se</a>
+                        <a href="/login" className='bg-white  pl-6 pr-6 rounded-lg z-10'>Cadastrar-se</a>
                         <img className='absolute -bottom-12 ' src={user} width='70rem' />{/* bottom-4*/}
                     </div>
 
 
                 </div>
 
-                <div className="flex text-3xl gap-7 max-[966px]:hidden">
-                    <a href='' className='hover:text-gray-400 cursor-pointer'>
+                <div className="flex text-3xl gap-7 max-[966px]:hidden text-white">
+                    <a href='' className=' hover:text-[#7A0C1F] cursor-pointer'>
                         <i className="fa-solid fa-cart-shopping"></i>
                     </a>
-                    <a href='/login' className='hover:text-green-500 cursor-pointer'>
+                    {/* <a href='/login' className='hover:text-green-500 cursor-pointer'>
                         <i className="fa-solid fa-circle-user"></i>
-                    </a>
+                    </a> */}
 
                 </div>
 
