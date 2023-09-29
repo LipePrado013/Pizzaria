@@ -1,7 +1,6 @@
 import Header from "../components/Header"
-import pizza from '../assets/img/pizza1card.png'
-import pizza2 from '../assets/img/pizza2card.png'
-import pizza3 from '../assets/img/pizza4card.png'
+import banner from  '../assets/img/banner-bg.png'
+import fundoCard from '../assets/img/fundoCardsPizza.jpg'
 
 import { cardsData } from "./Cardapio"
 
@@ -30,55 +29,48 @@ function Home() {
         <>
             <Header />
 
-            <div className={`pt-36 h-screen  flex flex-col items-center `}> {/* container  */}
+            <div className={`pt-36 pb-10 flex flex-col items-center border-4 border-red-600`}> {/* container  */}
 
-                <div className=" flex container flex-wrap p-3 bg-gray-200"> {/* box top */}
+                <div className={`flex w-[96rem] h-[25rem] max-[1581px]:w-[65rem] max-[1070px]:hidden flex-wrap justify-between bg-[url('${fundoCard}')] bg-cover gap-1 transition-all`}> {/* box top */}
 
-                    <div className=" w-[50%] text-white flex flex-col gap-3 ">{/*  cardsStick*/}
+                    <div className=" w-full text-white flex flex-col gap-3 bg-[#00000049]">{/*  cardsStick*/}
 
                         {/* <h1 className="text-5xl text-black font-bold">Promoções</h1> */}
 
-                        <div className="flex w-full relative">
+                        <div className="flex w-full relative h-full">
 
-                            <h1 className="titleH1 text-5xl font-bold absolute z-10">Promoções</h1>
+                            <h1 className="titleH1 text-5xl font-bold absolute z-10">Promoções das quintas-feiras OFF-25%</h1>
 
                             {cardsData.map((card) => (
                                 <>
 
-                                    <div className={`cardStick bg-[url('${card.img}')] bg-cover bg-left overflow-hidden h-96 w-[100px]`}>
+                                    <div className={`cardStick bg-[url('${card.img}')] bg-cover bg-left overflow-hidden w-[100px]`}>
                                         <div className="Stick h-full flex flex-col justify-between bg-[#00000094] p-5 pt-12">
                                             <h1 className="title text-3xl w-[200px]">{card.title}</h1>
                                             <a href="#" className="title  w-32 text-center rounded-lg bg-[#8F0701] hover:bg-[#CF0801]">Comprar</a>
-
                                         </div>
                                     </div>
 
                                 </>
                             ))}
-
-
+                            
 
                         </div>
 
 
                     </div>{/* fim cardsStick*/}
 
-                    <div className="border w-[50%]">
-
-                        {/* <div >
-                            <img className="mySlides h-96 object-cover" src={pizza} width='100%' />
-                            <img className="mySlides h-96 object-cover" src={pizza3} width='100%' />
-                            <img className="mySlides h-96 object-cover" src={pizza2} width='100%' />
-                        </div> */}
-
-                    </div>
-
                 </div> {/* box top fim*/}
 
-                <div >
-                    oi
+                <div className={`h-[35rem]  max-[1581px]:w-[65rem] max-[1070px]:hidden border border-black container bg-[url('${banner}')] bg-cover transition-all`}>
+                </div>
+                      
+                <div className="border border-black ">
+                                
+                                
                 </div>
 
+                
             </div > {/* container fim */}
 
 

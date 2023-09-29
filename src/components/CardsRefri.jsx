@@ -6,7 +6,6 @@ const CardsRefri = ({ cardsDataRefri }) => {
     return (
         <div className="w-full flex flex-wrap justify-evenly gap-5 p-10 ">
 
-
             {cardsDataRefri.map((card) => (
                 <div className="Mycard hover:shadow-[0_0_15px_-5px_black] rounded-lg w-[15rem] h-[20rem] bg-white p-3 flex flex-col justify-evenly items-center hover:scale-110 transition-all">
                     <img src={card.img} className="w-[10rem]" />

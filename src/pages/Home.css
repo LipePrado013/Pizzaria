@@ -10,9 +10,13 @@
     width: 50%;
 }
 
+.Stick {
+transition: .8s;
+}
+
 .cardStick:hover>.Stick {
     visibility: visible;
-    background: #00000044;
+    background: #00000028;
 }
 
 .titleH1 {
