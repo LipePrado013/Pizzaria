@@ -5,6 +5,7 @@ import Login from './pages/login'
 import Cadastrar from './pages/Cadastrar'
 import Cardapio from './pages/Cardapio'
 import Aula from './pages/aula2809'
+import Aula2 from './pages/aula0510'
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
           <Route path="/cadastrar" element={<Cadastrar />} />
           <Route path="/cardapio" element={<Cardapio />} />
           <Route path="/teste" element={<Aula />} />
+          <Route path="/aula2" element={<Aula2 />} />
         </Routes>
       </BrowserRouter>
   )

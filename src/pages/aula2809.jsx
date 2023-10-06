@@ -6,8 +6,7 @@ function aula() {
 const [users, setUser]= useState([]);
 
     function data() {
-        fetch ('https://jsonplaceholder.typicode.com/users').then((Response) => Response.json()).then((json) => setUser(json)
-        )
+        fetch ('https://jsonplaceholder.typicode.com/users').then((Response) => Response.json()).then((json) => setUser(json) )
     }
 
     useEffect(() => {
@@ -18,6 +17,10 @@ const [users, setUser]= useState([]);
         <div>
             <h1>api</h1>
             <a href="/">home</a>
+            <br />
+            <br />
+            <a href="/aula2">produtos</a>
+            <br />
             <br />
             <br />
             <br />
