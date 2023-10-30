@@ -30,11 +30,11 @@ function Header() {
                     </div>
                 </div>
                 <div className="flex text-3xl gap-7 max-[966px]:hidden text-white">
-                    <a href='/teste' className=' hover:text-[#7A0C1F] cursor-pointer'>
+                    <a href='/' className=' hover:text-[#7A0C1F] cursor-pointer'>
                         <i className="fa-solid fa-cart-shopping"></i>
                     </a>
                 </div>
-                
+
                 <button onClick={onClick} className='max-[966px]:block text-4xl hidden'><i className="fa-solid fa-bars"></i></button>
                 <div className={`absolute bottom-[-8.7rem] right-0 max-[500px]:left-0 max-[500px]:w-full w-96 z-10 flex flex-col gap-5 items-center p-2 bg-white ${clicked == true ? 'flex' : 'hidden'} shadow-[0_30px_105px_-65px_black] transition-all`}>
                     <a href='/' className='hover:bg-orange-500 active:bg-orange-500 w-full text-center font-bold hover:text-white transition-[1s] p-1'>Inicio</a>
