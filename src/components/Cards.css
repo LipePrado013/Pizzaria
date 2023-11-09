@@ -1,14 +1,13 @@
 .Mycard {
-    transition: all .5s;
+  transition: all .5s;
 }
 
 .Mycard p {
-    transition: all .3s;
+  transition: all .3s;
 
 
 }
 
-.Mycard:hover > p {
-    font-size: 2rem;
-    
-}   
+.Mycard:hover p {
+  font-size: 2rem;
+}

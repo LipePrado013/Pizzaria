@@ -1,36 +1,42 @@
 #imgpizza {
-    filter: drop-shadow(0 0 15px #000);
+  filter: drop-shadow(0 0 15px #000);
 }
 
 .cardStick {
-    transition: .8s;
+  transition: .8s;
 }
 
 .cardStick:hover {
-    width: 50%;
+  width: 50%;
 }
 
 .Stick {
-transition: .8s;
+  transition: .8s;
 }
 
 .cardStick:hover>.Stick {
-    visibility: visible;
-    background: #00000028;
+  visibility: visible;
+  background: #00000028;
 }
 
 .titleH1 {
-    color: #ffffff9f;
-    width: 100%;
-    background: #00000080;
+  color: #ffffff9f;
+  width: 100%;
+  background: #00000080;
 }
 
 .title {
-    opacity: 0;
-    transition: .8s;
+  opacity: 0;
+  transition: .8s;
 }
 
 .Stick:hover>.title {
-    opacity: 1;
-    visibility: visible;
+  opacity: 1;
+  visibility: visible;
+}
+
+@media (max-width:1000px) {
+  .cardStick {
+    width: 10%;
+  }
 }

@@ -15,9 +15,7 @@ function Cardapio() {
   return (
     <>
       <Header />
-
-
-      <div className="flex flex-col items-center pt-40 border border-black bg-slate-200">
+      <div className="flex flex-col items-center pt-40  bg-slate-200">
         <div className=" container flex justify-center">
           <Cards />
         </div>
@@ -29,8 +27,8 @@ function Cardapio() {
             <h1 className="text-6xl font-bold w-full">Bebidas</h1>
           </div>
         </div>
-        <div className=" w-full pl-4 pr-4 " id="Refri">
-
+        <div className=" container flex   pl-4 pr-4 " id="Refri">
+          <CardsRefri />
         </div>
       </div>
     </>
