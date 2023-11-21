@@ -28,8 +28,9 @@ function Home() {
           <div className=" w-full text-white flex flex-col gap-3 bg-[#00000049]">{/*  cardsStick*/}
             <div className="flex w-full relative h-full">
               <h1 className="titleH1 text-5xl font-bold absolute z-10">Promoções das quintas-feiras OFF-25%</h1>
+
               {produtos.map(pizza =>
-                <div className=" w-28 h-[25rem] hover:w-full cardStick relative">
+                <div key={pizza.id_pizza} className=" w-28 h-[25rem] hover:w-full cardStick relative">
                   <img src={`src/assets/img/${pizza.img_pizza}`} className="w-full h-full object-cover absolute" />
                   <div className="Stick h-full w-full flex flex-col justify-between bg-[#00000094] p-5 pt-12 absolute">
                     <h1 className="title text-3xl w-[200px] z-20">{pizza.nm_pizza}</h1>

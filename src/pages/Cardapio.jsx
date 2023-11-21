@@ -10,8 +10,6 @@ import bannerVertical from '../assets/img/banner-vertical.png'
 function Cardapio() {
 
 
-
-
   return (
     <>
       <Header />
