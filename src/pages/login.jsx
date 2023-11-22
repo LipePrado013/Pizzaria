@@ -3,6 +3,7 @@ import img from '../assets/img/bgLogin.png'
 
 function Login() {
 
+  const [troca, setTroca] = useState(true);
   const [users, setUsers] = useState([])
 
   function data() {
@@ -12,25 +13,22 @@ function Login() {
         setProdutos(json).splice())
   }
 
-  console.log(users)
+  const [cadastro, setCadastro] = useState({
+    nome: '',
+    email: '',
+    senha: '',
+    csenha: ''
+  });
 
-  const [troca, setTroca] = useState(true);
+  const valorI = e => setCadastro({ ...cadastro, [e.target.name]: e.target.value })
 
-  const [email, setEmail] = useState('')
-  const [senha, setSenha] = useState('')
-
-  function Entrar() {
-    // Verifique se o email fornecido está na lista de usuários
-    const user = users.find(userData => userData.cd_email === email);
-
-    if (user) {
-      // Se login bem sucedido, direciona para a página "Home"
-      console.log('entrou', user)
-    } else {
-      //Se login estiver errado dará erro
-      console.log('Email ou senha inválidos');
-      alert('Email ou senha inválidos')
-    }
+  const sendMsg = e => {
+    //nãop deixa a pagina recarregar
+    e.preventDefault();
+    console.log(`nome: ${cadastro.nome}`)
+    console.log(`email: ${cadastro.email}`)
+    console.log(`senha: ${cadastro.senha}`)
+    console.log(`consfirma senha: ${cadastro.csenha}`)
   }
 
   return (
@@ -44,22 +42,22 @@ function Login() {
           {troca ? (
 
             <div className=" w-[30rem] h-[25rem]  p-2 ">
-              <form action="" method="get" className="flex flex-col gap-5 items-center">
+              <form onSubmit={sendMsg} method="get" className="flex flex-col gap-5 items-center">
                 <h1 className='text-5xl text-white font-bold mb-10'>Login</h1>
-                <input type="text " id='email' placeholder="E-mail" className="p-1 rounded-lg w-[15rem] h-[3rem] text-xl" onChange={value => setEmail(value)} />
-                <input type="text" id='senha' placeholder="Senha" className="p-1 rounded-lg  w-[15rem] h-[3rem] text-xl" />
-                <button onClick={Entrar} className="pt-2 pb-2 pl-10 pr-10 bg-[#12FFA3] text-xl rounded-lg">Logar</button>
+                <input type="text" name='email' id='email' placeholder="E-mail" className="p-1 rounded-lg w-[15rem] h-[3rem] text-xl" />
+                <input type="text" name='senha' id='senha' placeholder="Senha" className="p-1 rounded-lg  w-[15rem] h-[3rem] text-xl" />
+                <button type='submit' className="pt-2 pb-2 pl-10 pr-10 bg-[#12FFA3] text-xl rounded-lg">Logar</button>
               </form>
               <a href='/adm' className='  absolute bottom-5 right-5 p-2 text-lg font-bold text-white'>adm</a>
             </div>
           ) : (
             <div className=" w-[30rem] h-[25rem]  p-2 ">
-              <form action="/" method="get" className="flex flex-col gap-5 items-center">
+              <form onSubmit={sendMsg} method="get" className="flex flex-col gap-5 items-center">
                 <h1 className='text-5xl text-white font-bold mb-10'>Cadastro</h1>
-                <input type="text" placeholder="Nome" className="p-1 rounded-lg w-[15rem] h-[3rem] text-xl " />
-                <input type="text" placeholder="E-mail" className="p-1 rounded-lg w-[15rem] h-[3rem] text-xl" />
-                <input type="text" placeholder="Senha" className="p-1 rounded-lg w-[15rem] h-[3rem] text-xl" />
-                <input type="text" placeholder="Confirmar senha" className="p-1 rounded-lg w-[15rem] h-[3rem] text-xl" />
+                <input type="text" placeholder="Nome" name='nome' className="p-1 rounded-lg w-[15rem] h-[3rem] text-xl " onChange={valorI} />
+                <input type="text" placeholder="E-mail" name='email' className="p-1 rounded-lg w-[15rem] h-[3rem] text-xl" onChange={valorI} />
+                <input type="text" placeholder="Senha" name='senha' className="p-1 rounded-lg w-[15rem] h-[3rem] text-xl" onChange={valorI} />
+                <input type="text" placeholder="Confirmar senha" name='csenha' className="p-1 rounded-lg w-[15rem] h-[3rem] text-xl" onChange={valorI} />
                 <button className="pt-2 pb-2 pl-10 pr-10 bg-[#12FFA3] text-xl rounded-lg">Cadastrar</button>
               </form>
             </div>
