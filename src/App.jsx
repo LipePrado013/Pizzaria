@@ -16,7 +16,6 @@ function App() {
         <Route path="/cardapio" element={<Cardapio />} />
         <Route path="/adm" element={<PedidosAdm />} />
         <Route path="/addpizza" element={<AddPizza />} />
-
       </Routes>
     </BrowserRouter>
   )
