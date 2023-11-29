@@ -6,25 +6,16 @@ use \Psr\Http\Message\ResponseInterface as Response;
 require './vendor/autoload.php';
 
 $app = new \Slim\App;
-$app->get('/', function (Request $request, Response $response, array $args) {
 
-  $response->getBody()->write("API ta ok ");
-  return $response;
+$app->add(function (Request $request, Response $response, $next) {
+  $response = $next($request, $response);
+
+  return $response
+    ->withHeader('Access-Control-Allow-Origin', 'http://localhost:8080')
+    ->withHeader('Access-Control-Allow-Headers', 'Content-Type')
+    ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 });
 
-$app->get('/hello/{name}', function (Request $request, Response $response, array $args) {
-
-  $name = $args['name'];
-
-  $response->getBody()->write("Eae , $name");
-  return $response;
-});
-
-$app->get('/users', 'getUsers');
-$app->get('/pizzas', 'getPizzas');
-$app->get('/refris', 'getRefris');
-$app->get('/PaginaAdm', 'getAdm');
-// $app->get('/pizza/{id}', 'getPizza');
 
 function getConn()
 {
@@ -33,60 +24,99 @@ function getConn()
     'mysql:host=localhost:3306;dbname=pizzas',
     'root',
     '',
-    array(PDO::MYSQL_ATTR_INIT_COMMAND  => 'SET NAMES utf8')
+    [PDO::MYSQL_ATTR_INIT_COMMAND  => 'SET NAMES utf8']
   );
 }
 
-function getUsers(Request $request, Response $response, array $args)
-{
+$app->get('/', function (Request $request, Response $response, array $args) {
+  $response->getBody()->write("API pizza ta ok");
+  return $response;
+});
+
+$app->get('/users', function (Request $request, Response $response, array $args) {
   $sql = 'SELECT * FROM tb_usuarios';
-  $stmt  = getConn()->query($sql);
-  $produtos = $stmt->fetchAll(PDO::FETCH_OBJ);
-  $response->getBody()->write(json_encode($produtos));
-  return $response;
-}
-function getPizzas(Request $request, Response $response, array $args)
+  $stmt = getConn()->query($sql);
+  $users = $stmt->fetchAll(PDO::FETCH_OBJ);
+  return $response->withJson($users);
+});
 
-{
-  $sql = 'SELECT * FROM tb_pizzas';
-  $stmt  = getConn()->query($sql);
-  $produtos = $stmt->fetchAll(PDO::FETCH_OBJ);
-  $response->getBody()->write(json_encode($produtos));
-  return $response;
-}
-
-function getRefris(Request $request, Response $response, array $args)
-{
+$app->get('/refris', function (Request $request, Response $response, array $args) {
   $sql = 'SELECT * FROM tb_refris';
-  $stmt  = getConn()->query($sql);
-  $produtos = $stmt->fetchAll(PDO::FETCH_OBJ);
-  $response->getBody()->write(json_encode($produtos));
-  return $response;
-}
+  $stmt = getConn()->query($sql);
+  $users = $stmt->fetchAll(PDO::FETCH_OBJ);
+  return $response->withJson($users);
+});
 
-function getAdm(Request $request, Response $response, array $args)
-{
+$app->get('/pizzas', function (Request $request, Response $response, array $args) {
+  $sql = 'SELECT * FROM tb_pizzas';
+  $stmt = getConn()->query($sql);
+  $users = $stmt->fetchAll(PDO::FETCH_OBJ);
+  return $response->withJson($users);
+});
+
+$app->get('/PaginaAdm', function (Request $request, Response $response, array $args) {
   $sql = 'SELECT * FROM tb_adm';
-  $stmt  = getConn()->query($sql);
-  $produtos = $stmt->fetchAll(PDO::FETCH_OBJ);
-  $response->getBody()->write(json_encode($produtos));
-  return $response;
+  $stmt = getConn()->query($sql);
+  $users = $stmt->fetchAll(PDO::FETCH_OBJ);
+  return $response->withJson($users);
+});
+
+$app->post('/cadastarUsers', function (Request $request, Response $response, array $args) {
+  $data = $request->getParsedBody();
+
+  // Verificar se o email já existe
+  $existingEmail = checkExistingEmail($data['emailUser']);
+
+  if ($existingEmail) {
+    // Email já existe, retornar uma resposta indicando o conflito
+    $responseData = ['error' => 'Email já está em uso'];
+    return $response->withJson($responseData, 409); // 409 indica um conflito
+  }
+
+  // O email não existe, prosseguir com a inserção no banco de dados
+  $sql = "INSERT INTO  tb_usuarios (nome, emailUser, senhaUser, csenhaUser) VALUES (:nome, :emailUser, :senhaUser, :csenhaUser)";
+  $conn = getConn();
+  $stmt = $conn->prepare($sql);
+  $stmt->execute($data);
+
+  $data['id'] = $conn->lastInsertId();
+  return $response->withJson($data);
+});
+
+function checkExistingEmail($email)
+{
+  // Verificar se o email já existe no banco de dados
+  $sql = "SELECT COUNT(*) as count FROM tb_usuarios WHERE emailUser = :email";
+  $conn = getConn();
+  $stmt = $conn->prepare($sql);
+  $stmt->bindParam(':email', $email);
+  $stmt->execute();
+  $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+  // Se o contador for maior que zero, o email já existe
+  return $result['count'] > 0;
 }
 
-// function getPizza(Request $request, Response $response, array $args)
-// {
+$app->post('/login', function (Request $request, Response $response, array $args) {
+  $loginData = $request->getParsedBody();
 
-//     $id = $args['id'];
-//     $conn = getConn();
-//     $sql = "SELECT * FROM tb_pizzas WHERE ID=:id";
-//     $stmt = $conn->prepare($sql);
-//     $stmt->bindParam("id", $id);
-//     $stmt->execute();
-//     $produto = $stmt->fetchObject();
+  // Lógica para verificar se o usuário existe no banco
+  $conn = getConn();
+  $sql = "SELECT * FROM tb_usuarios WHERE emailUser = :email AND senhaUser = :senha";
+  $stmt = $conn->prepare($sql);
+  $stmt->bindParam("email", $loginData['email']);
+  $stmt->bindParam("senha", $loginData['senha']);
+  $stmt->execute();
+  $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-//     $response->getBody()->write(json_encode($produto));
-//     return $response;
-// }
+  if ($user) {
+    // Usuário existe, você pode retornar algum dado ou apenas um código de sucesso
+    return $response->withJson(['message' => 'Login bem-sucedido']);
+  } else {
+    // Usuário não encontrado
+    return $response->withStatus(401)->withJson(['error' => 'Credenciais inválidas']);
+  }
+});
 
 
 $app->run();
