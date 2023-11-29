@@ -2,11 +2,10 @@ import { useEffect, useState } from 'react';
 import img from '../assets/img/bgLogin.png';
 import { useNavigate } from 'react-router-dom';
 
-
 function Login() {
-  const history = useNavigate()
+  const history = useNavigate();
   const [troca, setTroca] = useState(true);
-
+  const [showMessage, setShowMessage] = useState(false);
 
   const [loginData, setLoginData] = useState({
     emailUser: '',
@@ -57,7 +56,6 @@ function Login() {
       });
   };
 
-
   const [formData, setFormData] = useState({
     nome: '',
     emailUser: '',
@@ -88,12 +86,18 @@ function Login() {
       if (response.ok) {
         const responseData = await response.json();
         console.log('Cadastro realizado com sucesso:', responseData);
-        useState({
+
+        // Limpa os campos do formulário após o cadastro
+        setFormData({
           nome: '',
           emailUser: '',
           senhaUser: '',
           csenhaUser: '',
         });
+
+        // Exibe a mensagem de sucesso por 5 segundos
+        setShowMessage(true);
+        setTimeout(() => setShowMessage(false), 2000);
       } else {
         console.error('Erro ao cadastrar usuário.');
       }
@@ -101,19 +105,16 @@ function Login() {
       console.error('Erro na requisição:', error);
     }
   };
+
   return (
     <>
       <div className={`flex justify-center items-center w-screen h-screen bg-[url('${img}')] bg-no-repeat bg-cover`}>
         <div className=" w-[30rem] h-[40rem] fixed flex-col right-[15rem] flex justify-evenly  rounded-[20px] backdrop-blur-sm shadow-[0_0_20px]">
-          {/* {
-            message ? <p>{message}</p> : ''
-          } */}
           <div className=" w-[30rem] rounded-t-lg z-10 p-1 gap-3 flex ml-5">
             <button onClick={() => setTroca(true)} className={`p-2 rounded-lg font-bold transition-all ${troca ? ('bg-blue-500 ') : ('text-white')}`}>Login</button>
             <button onClick={() => setTroca(false)} className={`p-2 rounded-lg font-bold transition-all ${troca ? ('text-white') : ('bg-blue-500 ')}  `}>Cadastro</button>
           </div>
           {troca ? (
-
             <>
               <div className="w-[30rem] h-[25rem] p-2">
                 <form onSubmit={handleSubmitee} className="flex flex-col gap-5 items-center">
@@ -158,12 +159,16 @@ function Login() {
                 </form>
               </div>
             </>
-          )
-          }
+          )}
+          {showMessage && (
+            <div className="fixed top-10 right-10 p-4 bg-green-500 text-white rounded-lg">
+              Cadastro realizado com sucesso!
+            </div>
+          )}
         </div>
-      </div >
+      </div>
     </>
-  )
+  );
 }
 
-export default Login
+export default Login;
