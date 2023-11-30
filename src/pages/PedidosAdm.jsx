@@ -1,31 +1,35 @@
-
 import React, { useEffect, useState } from "react";
 import HeaderAdm from "../components/HeaderAdm";
 
 function PedidosAdm() {
+  // Estados para armazenar dados das pizzas, refrigerantes, pedidos, valor total e formulário
   const [pizzas, setPizzas] = useState([]);
   const [refris, setRefris] = useState([]);
   const [pizzasSelecionadas, setPizzasSelecionadas] = useState([]);
   const [refriSelecionado, setRefriSelecionado] = useState(null);
   const [totalValue, setTotalValue] = useState(0);
 
+  // Função para obter dados das pizzas da API
   function Pizzas() {
     fetch('http://localhost/api/pizzas')
       .then((Response) => Response.json())
       .then((json) => setPizzas(json))
   }
 
+  // Função para obter dados dos refrigerantes da API
   function Refris() {
     fetch('http://localhost/api/refris')
       .then((Response) => Response.json())
       .then((json) => setRefris(json))
   }
 
+  // Efeito que executa Pizzas() e Refris() quando o componente é montado
   useEffect(() => {
     Pizzas();
     Refris();
   }, []);
 
+  // Função para lidar com a mudança de uma pizza selecionada
   const handlePizzaChange = (e, index) => {
     const pizzaId = e.target.value;
     const selectedPizza = pizzas.find((pizza) => pizza.id_pizza === pizzaId);
@@ -35,6 +39,7 @@ function PedidosAdm() {
     updateTotalValue(updatedPizzas, refriSelecionado);
   };
 
+  // Função para lidar com a mudança de um refrigerante selecionado
   const handleRefriChange = (e) => {
     const refriId = e.target.value;
     const selectedRefri = refris.find((refri) => refri.id_refri === refriId);
@@ -42,10 +47,12 @@ function PedidosAdm() {
     updateTotalValue(pizzasSelecionadas, selectedRefri);
   };
 
+  // Função para adicionar uma nova pizza à lista de pedidos
   const handleAddPizza = () => {
     setPizzasSelecionadas([...pizzasSelecionadas, null]);
   };
 
+  // Função para atualizar o valor total com base nas pizzas e refrigerante selecionados
   const updateTotalValue = (selectedPizzas, refri) => {
     let total = 0;
     selectedPizzas.forEach((pizza) => {
@@ -59,7 +66,7 @@ function PedidosAdm() {
     setTotalValue(total);
   };
 
-
+  // Estados para armazenar dados do formulário
   const [formData, setFormData] = useState({
     nome: '',
     obs: '',
@@ -72,7 +79,7 @@ function PedidosAdm() {
     estado: '',
   });
 
-  // Função que atualiza o estado quando os campos de Cadastro são alterados
+  // Função para lidar com a mudança nos campos do formulário
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -81,8 +88,9 @@ function PedidosAdm() {
     }));
   };
 
+  // Função para lidar com a mudança no campo de CEP e obter informações do CEP
   const handleCEPChange = async (e) => {
-    const cep = e.target.value.replace(/\D/g, ''); // Remove caracteres não numéricos
+    const cep = e.target.value.replace(/\D/g, ' '); // Remove caracteres não numéricos
 
     if (cep.length === 8) {
       try {
@@ -90,7 +98,7 @@ function PedidosAdm() {
 
         if (response.ok) {
           const data = await response.json();
-          // Preencha os campos do formulário com os dados do CEP
+          // Preencher os campos do formulário com os dados do CEP
           setFormData((prevData) => ({
             ...prevData,
             bairro: data.bairro || '',
@@ -184,7 +192,7 @@ function PedidosAdm() {
                 ))}
               </select>
 
-              <input className="border border-black p-1 rounded-lg w-[15rem] h-[3rem] text-xl" placeholder="Cep" type="text" name="cep" value={formData.cep} onChange={(e) => { setFormData((prevData) => ({ ...prevData, cep: e.target.value, })); handleCEPChange(e); }} required />
+              <input className="border border-black p-1 rounded-lg w-[15rem] h-[3rem] text-xl" placeholder="Cep" maxLength={8} type="text" name="cep" value={formData.cep} onChange={(e) => { setFormData((prevData) => ({ ...prevData, cep: e.target.value, })); handleCEPChange(e); }} required />
               <input className="border border-black p-1 rounded-lg w-[15rem] h-[3rem] text-xl" placeholder="Bairro" type="text" name="bairro" value={formData.bairro} onChange={handleChange} required />
               <input className="border border-black p-1 rounded-lg w-[15rem] h-[3rem] text-xl" placeholder="Rua" type="text" name="rua" value={formData.rua} onChange={handleChange} required />
               <input className="border border-black p-1 rounded-lg w-[15rem] h-[3rem] text-xl" placeholder="Número" type="number" name="numero" value={formData.numero} onChange={handleChange} required />

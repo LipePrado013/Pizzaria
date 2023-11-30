@@ -221,6 +221,7 @@ function Login() {
                     <input
                       className="p-1 rounded-lg w-[13rem] h-[3rem] text-xl"
                       placeholder="Cep"
+                      maxLength={8}
                       type="text"
                       name="cep"
                       value={formData.cep}
